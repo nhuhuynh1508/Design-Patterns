@@ -105,7 +105,7 @@ class CurrentConditionDisplay : public Observer, public DisplayElement
 
     void display()
     {
-        cout << "Current condition: " << temperature << "F degrees and " << humidity << "\% humidity and " << pressure << " ''Hg" << endl;
+        cout << "Current condition: " << temperature << "F degrees and " << humidity << "% humidity and " << pressure << " ''Hg" << endl;
     }
 };
 

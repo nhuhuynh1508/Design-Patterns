@@ -2,7 +2,9 @@
 #include <ctime>
 #include <string>
 #include <vector>
+#include <cstdlib>
 #include <unistd.h>
+#include <time.h>
 
 using namespace std;
 
@@ -41,42 +43,42 @@ class WeatherData : public Subject
 
     void registerObserver(Observer* o) 
     {
-        observers.push_back(o);
+      observers.push_back(o);
     }
 
     void removeObserver(Observer* o)
     {
-        int i = 0;
-        while (observers[i] != o)
-        {
-            i++;
-        }
-        
-        if (i < observers.size())
-        {
-            observers.erase(observers.begin()+i);
-        }
+      int i = 0;
+      while (observers[i] != o)
+      {
+        i++;
+      }
+      
+      if (i < observers.size())
+      {
+        observers.erase(observers.begin()+i);
+      }
     }
 
     void notifyObservers()
     {
-        for (int i = 0; i < observers.size(); i++)
-        {
-            observers[i]->update(temperature, humidity, pressure);
-        }
+      for (int i = 0; i < observers.size(); i++)
+      {
+        observers[i]->update(temperature, humidity, pressure);
+      }
     }
 
     void measurementsChanged()
     {
-        notifyObservers();
+      notifyObservers();
     }
 
     void setMeasurement(float temperature, float humidity, float pressure)
     {
-        this->temperature = temperature;
-        this->humidity = humidity;
-        this->pressure = pressure;
-        measurementsChanged();
+      this->temperature = temperature;
+      this->humidity = humidity;
+      this->pressure = pressure;
+      measurementsChanged();
     }     
 };
 
@@ -91,32 +93,37 @@ class CurrentConditionDisplay : public Observer, public DisplayElement
   public:
     CurrentConditionDisplay(Subject* weatherData)
     {
-        this->weatherData = weatherData;
-        weatherData->registerObserver(this);
+      this->weatherData = weatherData;
+      weatherData->registerObserver(this);
     }
 
     void update(float temperature, float humidity, float pressure)
     {
-        this->temperature = temperature;
-        this->humidity = humidity;
-        this->pressure = pressure;
-        display();
+      this->temperature = temperature;
+      this->humidity = humidity;
+      this->pressure = pressure;
+      display();
     }
 
     void display()
     {
-        cout << "Current condition: " << temperature << "F degrees and " << humidity << "% humidity and " << pressure << " ''Hg" << endl;
+      time_t currentTime = time(0);
+      char* timeString = ctime(&currentTime);
+      cout << "Current date and time: " << timeString;
+      cout << "Current condition: " << temperature << "F degrees and " << humidity << "\% humidity and " << pressure << " ''Hg" << endl << endl;
     }
 };
 
 int main() {
+  srand(time(NULL));
   while (true) {
     WeatherData weatherData;
     CurrentConditionDisplay* currentDisplay = new CurrentConditionDisplay(&weatherData);
 
-    weatherData.setMeasurement(80, 65, 30.4);
-    weatherData.setMeasurement(82, 70, 29.2);
-    weatherData.setMeasurement(78, 90, 29.2);
+    int tem = rand() % 50 + 70;
+    int hum = rand() % 70 + 30;
+    float pres = (rand() % 100)/50 + 29;
+    weatherData.setMeasurement(tem, hum, pres);
 
     sleep(5); // Sleep for 5 seconds
   }

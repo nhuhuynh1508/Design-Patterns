@@ -1,6 +1,7 @@
 {
   "files.exclude": {
-    "observer.exe": true
+    "observer.exe": true,
+    "**/*.exe": true
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

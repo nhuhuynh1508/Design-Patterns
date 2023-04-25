@@ -61,11 +61,7 @@ class Duck
     FlyBehavior* flyBehavior; 
     QuackBehavior* quackBehavior; 
 
-  public:
-    Duck() {
-      flyBehavior = 0; 
-      quackBehavior = 0; 
-    }
+    Duck() {}
 
     virtual void display() = 0; // Make display() a pure virtual function
 

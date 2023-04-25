@@ -8,18 +8,21 @@
 
 using namespace std;
 
+// The Observer class is an abstract class that defines a method called update(), which will be implemented by any concrete observer class.
 class Observer
 {
   public:
     virtual void update(float temp, float humidity, float pressure) = 0;
 };
 
+// The DisplayElement class is another abstract class that defines a method called display() which will be implemented by any concrete display class. 
 class DisplayElement
 {
   public:
     virtual void display() = 0;
 };
 
+// The Subject class is also an abstract class that defines methods for registering, removing, and notifying observers.
 class Subject
 {
   public:
@@ -30,6 +33,7 @@ class Subject
     virtual void notifyObservers() = 0;
 }; 
 
+// The WeatherData class is a concrete implementation of the Subject class.
 class WeatherData : public Subject
 {
   private:
@@ -110,7 +114,7 @@ class CurrentConditionDisplay : public Observer, public DisplayElement
       time_t currentTime = time(0);
       char* timeString = ctime(&currentTime);
       cout << "Current date and time: " << timeString;
-      cout << "Current condition: " << temperature << "F degrees and " << humidity << "\% humidity and " << pressure << " ''Hg" << endl << endl;
+      cout << "Current condition: " << temperature << "F degrees and " << humidity << "% humidity and " << pressure << " ''Hg" << endl << endl;
     }
 };
 

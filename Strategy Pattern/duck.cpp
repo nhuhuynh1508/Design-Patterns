@@ -113,16 +113,17 @@ class ModelDuck : public Duck
 };
 
 int main() {
-  MallardDuck mallard;
-  mallard.display();
-  mallard.performQuack();
-  mallard.performFly();
+  // MallardDuck mallard;
+  // mallard.display();
+  // mallard.performQuack();
+  // mallard.performFly();
 
   ModelDuck duck;
   duck.display();
   duck.performQuack();
-  duck.setFlyBehavior(new FlyWithWings());
   duck.performFly();
+  duck.setQuackBehavior(new Quack());
+  duck.performQuack();
   return 0;
 }
 

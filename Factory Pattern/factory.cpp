@@ -175,14 +175,12 @@ public:
 
         if (type == "cheese pizza") {
             pizza = new CheesePizza(ingredientFactory);
-            pizza->name = "New York Style Cheese Pizza";
         } else if (type == "veggie pizza") {
             pizza = new VeggiePizza(ingredientFactory);
-            pizza->name = "New York Style Veggie Pizza";
         } else if (type == "clam pizza") {
             pizza = new ClamPizza(ingredientFactory);
-            pizza->name = "New York Style Clam Pizza";
         }
+        pizza->name = "New York Style " + pizza->name;
 
         return pizza;
     }
@@ -196,14 +194,12 @@ public:
 
         if (type == "cheese pizza") {
             pizza = new CheesePizza(ingredientFactory);
-            pizza->name = "Chicago Style Cheese Pizza";
         } else if (type == "veggie pizza") {
             pizza = new VeggiePizza(ingredientFactory);
-            pizza->name = "Chicago Style Veggie Pizza";
         } else if (type == "clam pizza") {
             pizza = new ClamPizza(ingredientFactory);
-            pizza->name = "Chicago Style Clam Pizza";
         }
+        pizza->name = "Chicago Style " + pizza->name;
 
         return pizza;
     }
@@ -214,16 +210,16 @@ int main() {
     PizzaStore* chicagoStore = new ChicagoPizzaStore();
 
     Pizza* pizza = nyStore->orderPizza("cheese pizza");
-    cout << "Ethan ordered a " << pizza->getName() << endl;
+    cout << "Ethan ordered a " << pizza->getName() << endl << endl;
 
     pizza = chicagoStore->orderPizza("veggie pizza");
-    cout << "Joel ordered a " << pizza->getName() << endl;
+    cout << "Joel ordered a " << pizza->getName() << endl << endl;
 
     pizza = nyStore->orderPizza("clam pizza");
-    cout << "Ethan ordered a " << pizza->getName() << endl;
+    cout << "Ethan ordered a " << pizza->getName() << endl << endl;
 
     pizza = chicagoStore->orderPizza("clam pizza");
-    cout << "Joel ordered a " << pizza->getName() << endl;
+    cout << "Joel ordered a " << pizza->getName() << endl << endl;
 
     return 0;
 }
